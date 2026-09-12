@@ -1,19 +1,34 @@
-Day = range(1, 32)
+Week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
 Month = [
-    'january',
-    'febuary',
-    'march',
-    'april',
-    'may',
-    'june',
-    'july',
-    'august',
-    'september',
-    'october',
-    'november',
-    'december'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ]
+
+
+def weekday(year, month, day):
+    if month < 3:
+        month += 12
+        year -= 1
+
+    K = year % 100
+    J = year // 100
+
+    f = day + ((13 * (month + 1)) // 5) + K + (K // 4) + (J // 4) - (2 * J)
+
+    return (f + 6) % 7
+
+
 def leap_year(year):
     if year % 4 == 0:
         if year % 100 == 0:
@@ -25,18 +40,26 @@ def leap_year(year):
             return True
     else:
         return False
-i = 0
-year = int(input())
 
+
+year = int(input("Enter year: "))
 
 if year > 0:
 
     for i, month in enumerate(Month):
 
-        if month in ['january', 'march', 'may', 'july', 'august', 'october', 'december']:
+        if month in [
+            "January",
+            "March",
+            "May",
+            "July",
+            "August",
+            "October",
+            "December",
+        ]:
             days = 31
 
-        elif month in ['febuary']:
+        elif month == "February":
             if leap_year(year):
                 days = 29
             else:
@@ -45,13 +68,22 @@ if year > 0:
         else:
             days = 30
 
-        print("\n", Month[i], "\n")
+        print("\n", month, "\n")
+
+        for week in Week:
+            print(week, end=" ")
+
+        print()
+
+        first_day = weekday(year, i + 1, 1)
+
+        for _ in range(first_day):
+            print("   ", end="")
 
         for day in range(1, days + 1):
-            print(day, end=" ")
+            print(f"{day:2}", end=" ")
 
-            if day % 7 == 0:
+            if (day + first_day) % 7 == 0:
                 print()
 
-print("\n")
-
+        print()
