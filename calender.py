@@ -1,3 +1,4 @@
+
 Week = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
 Month = [
@@ -44,6 +45,7 @@ def leap_year(year):
 
 year = int(input("Enter year: "))
 
+
 if year > 0:
 
     for i, month in enumerate(Month):
@@ -85,5 +87,4 @@ if year > 0:
 
             if (day + first_day) % 7 == 0:
                 print()
-
         print()
